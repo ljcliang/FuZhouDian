@@ -49,4 +49,9 @@
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">match_parent</item>
     </style>
+
+    <style name="popwindow_anim_top_in_out">
+        <item name="android:windowEnterAnimation">@anim/pophiden_anim_top_in</item>
+        <item name="android:windowExitAnimation">@anim/pophiden_anim_top_out</item>
+    </style>
 </resources>
