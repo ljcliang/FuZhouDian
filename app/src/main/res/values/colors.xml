@@ -8,10 +8,13 @@
     <color name="colorAccent">#4E94A0</color>
 
     <color name="color_f8f8f8">#f8f8f8</color>
+    <color name="color_d8d8d8">#d8d8d8</color>
     <color name="color_white_ffffff">#ffffff</color>
     <color name="color_101010">#101010</color>
     <color name="color_666666">#666666</color>
+    <color name="color_999999">#999999</color>
     <color name="color_C69E76">#C69E76</color>
     <color name="color_f0f0f0">#f0f0f0</color>
+    <color name="color_f3f3f3">#f3f3f3</color>
     <color name="color_d84c37">#d84c37</color>
 </resources>

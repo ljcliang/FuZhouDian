@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yiwo.fuzhoudian.R;
+import com.yiwo.fuzhoudian.pages.ShopHomeActivity;
 
 import java.util.List;
 
@@ -38,6 +39,12 @@ public class HomeTuiJianDianPuAdapter extends RecyclerView.Adapter<HomeTuiJianDi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.rl_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShopHomeActivity.start(context);
+            }
+        });
 //        final Intent intent = new Intent();
 //        holder.tv_name.setText(data.get(position).getUsername());
 //        holder.tv_level.setText("Lv."+data.get(position).getUsergrade());
