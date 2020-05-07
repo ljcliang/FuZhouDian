@@ -12,13 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.yiwo.fuzhoudian.MainActivity;
 import com.yiwo.fuzhoudian.R;
 import com.yiwo.fuzhoudian.base.BaseFragment;
 import com.yiwo.fuzhoudian.utils.AndTools;
+import com.yiwo.fuzhoudian.utils.ShoppingCartUntils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +69,14 @@ public class HomeFragment extends BaseFragment {
 
     private void initVpFragment() {
         guanZhuFragment = new HomeGuanZhuFragment();
+        guanZhuFragment.setAddToCartListenner(new HomeGuanZhuFragment.AddToCartListenner() {
+            @Override
+            public void addGoods(ImageView imageView) {
+                ImageView ivCart = ((MainActivity)getActivity()).getCartImageView();
+                RelativeLayout rlMain = ((MainActivity)getActivity()).getRlMain();
+                ShoppingCartUntils.add2Cart(imageView,ivCart,getContext(),rlMain);
+            }
+        });
         tuiJianFragment = new HomeTuiJianFragment();
         zhouBianFragment = new HomeZhouBianFragment();
         fragmentList.add(guanZhuFragment);

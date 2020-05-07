@@ -22,9 +22,11 @@ import java.util.List;
 public class HomeGuanZhuDianPuAdapter extends RecyclerView.Adapter<HomeGuanZhuDianPuAdapter.ViewHolder>{
     private Context context;
     private List<String> data;
+    private Add2CartListenner add2CartListenner;
 //    private SpImp spImp;
-    public HomeGuanZhuDianPuAdapter(List<String> data){
+    public HomeGuanZhuDianPuAdapter(List<String> data,Add2CartListenner listenner){
         this.data = data;
+        this.add2CartListenner = listenner;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,7 +48,12 @@ public class HomeGuanZhuDianPuAdapter extends RecyclerView.Adapter<HomeGuanZhuDi
         datas.add("");
         datas.add("");
         datas.add("");
-        HomeGuanZhuDianPuShangPinAdapter shangPinAdapter = new HomeGuanZhuDianPuShangPinAdapter(datas);
+        HomeGuanZhuDianPuShangPinAdapter shangPinAdapter = new HomeGuanZhuDianPuShangPinAdapter(datas, new HomeGuanZhuDianPuShangPinAdapter.AddClickListenner() {
+            @Override
+            public void addListen(int i, ImageView ivGoods) {
+                add2CartListenner.addGoods(position,ivGoods);
+            }
+        });
         holder.rv.setLayoutManager(manager);
         holder.rv.setAdapter(shangPinAdapter);
     }
@@ -74,5 +81,8 @@ public class HomeGuanZhuDianPuAdapter extends RecyclerView.Adapter<HomeGuanZhuDi
             iv_level = itemView.findViewById(R.id.iv_level);
             rv = itemView.findViewById(R.id.rv);
         }
+    }
+    public interface Add2CartListenner{
+        void addGoods(int pos,ImageView addGoodIv);
     }
 }

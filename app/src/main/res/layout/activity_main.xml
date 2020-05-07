@@ -7,6 +7,7 @@
     android:background="@color/color_f8f8f8"
     tools:context=".MainActivity">
     <RelativeLayout
+        android:id="@+id/rl_main"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -3,8 +3,15 @@
     android:orientation="vertical"
     android:id="@+id/ll_tab_bar"
     android:background="@color/color_white_ffffff"
+    android:elevation="0dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <View
+        android:id="@+id/v_staus"
+        android:visibility="gone"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
     <LinearLayout
         android:background="@drawable/bg_4e94a0_20dp_top_left"
         android:paddingRight="30dp"
@@ -18,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:background="@drawable/selector_tv_shop_home_top"
                 android:id="@+id/tv_shop_home_tap1"
                 android:gravity="center"
                 android:layout_gravity="center"
@@ -34,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:background="@drawable/selector_tv_shop_home_top"
                 android:id="@+id/tv_shop_home_tap2"
                 android:gravity="center"
                 android:layout_gravity="center"
@@ -50,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:background="@drawable/selector_tv_shop_home_top"
                 android:id="@+id/tv_shop_home_tap3"
                 android:gravity="center"
                 android:layout_gravity="center"
@@ -126,7 +136,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
-            android:background="@drawable/bg_ffffff_10dp_top"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/selector_bg_shop_home_top_kinds"
             android:id="@+id/rl1"
             android:layout_width="70dp"
             android:layout_height="50dp">
@@ -139,7 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <View
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/v1"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/bg_c69e76_10dp_bottom"
@@ -147,6 +158,8 @@
                 android:layout_height="5dp"/>
         </RelativeLayout>
         <RelativeLayout
+            android:background="@drawable/selector_bg_shop_home_top_kinds"
+            android:layout_marginLeft="5dp"
             android:id="@+id/rl2"
             android:layout_width="70dp"
             android:layout_height="50dp">
@@ -167,6 +180,8 @@
                 android:layout_height="5dp"/>
         </RelativeLayout>
         <RelativeLayout
+            android:background="@drawable/selector_bg_shop_home_top_kinds"
+            android:layout_marginLeft="5dp"
             android:id="@+id/rl3"
             android:layout_width="70dp"
             android:layout_height="50dp">

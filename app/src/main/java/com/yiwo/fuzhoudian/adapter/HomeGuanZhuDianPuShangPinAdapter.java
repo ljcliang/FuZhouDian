@@ -19,9 +19,11 @@ import java.util.List;
 public class HomeGuanZhuDianPuShangPinAdapter extends RecyclerView.Adapter<HomeGuanZhuDianPuShangPinAdapter.ViewHolder>{
     private Context context;
     private List<String> data;
+    private AddClickListenner listenner;
 //    private SpImp spImp;
-    public HomeGuanZhuDianPuShangPinAdapter(List<String> data){
+    public HomeGuanZhuDianPuShangPinAdapter(List<String> data,AddClickListenner listenner){
         this.data = data;
+        this.listenner = listenner;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -34,7 +36,12 @@ public class HomeGuanZhuDianPuShangPinAdapter extends RecyclerView.Adapter<HomeG
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-
+        holder.home_goods_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listenner.addListen(position,holder.home_goods_add);
+            }
+        });
     }
 
     @Override
@@ -43,22 +50,15 @@ public class HomeGuanZhuDianPuShangPinAdapter extends RecyclerView.Adapter<HomeG
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView iv_head;
-        TextView tv_shop_name,tv_level,tv_shop_tel,tv_address,tv_juli;
-        ImageView iv_level;
-        RecyclerView rv;
+        ImageView home_goods_add,iv;
         public ViewHolder(View itemView) {
             super(itemView);
+            home_goods_add = itemView.findViewById(R.id.iv_add);
+            iv = itemView.findViewById(R.id.iv);
 
-            tv_shop_name = itemView.findViewById(R.id.tv_shop_name);
-            tv_level = itemView.findViewById(R.id.tv_level);
-            iv_head = itemView.findViewById(R.id.iv_head);
-            tv_address = itemView.findViewById(R.id.tv_address);
-            tv_shop_tel = itemView.findViewById(R.id.tv_shop_tel);
-            tv_address = itemView.findViewById(R.id.tv_address);
-            tv_juli = itemView.findViewById(R.id.tv_juli);
-            iv_level = itemView.findViewById(R.id.iv_level);
-            rv = itemView.findViewById(R.id.rv);
         }
+    }
+    public interface AddClickListenner{
+        void addListen(int i,ImageView ivGoods);
     }
 }

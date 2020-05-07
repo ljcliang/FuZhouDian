@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.yiwo.fuzhoudian.fragments.OrderFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,7 +37,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.ll_btn_2)
     LinearLayout llBtn2;
     @BindView(R.id.iv_bottom_3)
-    ImageView ivBottom3;
+    ImageView ivBottom3;//购物车图标
     @BindView(R.id.ll_btn_3)
     LinearLayout llBtn3;
     @BindView(R.id.iv_bottom_4)
@@ -58,6 +60,8 @@ public class MainActivity extends BaseActivity {
     TextView tvBottom5;
     @BindView(R.id.fl_container)
     FrameLayout flContainer;
+    @BindView(R.id.rl_main)
+    RelativeLayout rlMain;
     private long exitTime = 0;
 
     private List<Fragment> fragmentList = new ArrayList<>();
@@ -68,6 +72,7 @@ public class MainActivity extends BaseActivity {
     MessageFragment messageFragment;
     MineFragment mineFragment;
     OrderFragment orderFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +137,7 @@ public class MainActivity extends BaseActivity {
             exitTime = 0;
         }
     }
+
     public void select(int i) {
         tvBottom1.setSelected(false);
         tvBottom2.setSelected(false);
@@ -141,7 +147,7 @@ public class MainActivity extends BaseActivity {
         ivBottom2.setSelected(false);
         ivBottom4.setSelected(false);
         ivBottom5.setSelected(false);
-        switch (i){
+        switch (i) {
             case 0:
                 tvBottom1.setSelected(true);
                 ivBottom1.setSelected(true);
@@ -159,6 +165,13 @@ public class MainActivity extends BaseActivity {
                 ivBottom5.setSelected(true);
                 break;
         }
+    }
+
+    public ImageView getCartImageView() {
+        return ivBottom3;
+    }
+    public RelativeLayout getRlMain() {
+        return rlMain;
     }
     @OnClick({R.id.ll_btn_1, R.id.ll_btn_2, R.id.ll_btn_3, R.id.ll_btn_4, R.id.ll_btn_5})
     public void onClick(View v) {
