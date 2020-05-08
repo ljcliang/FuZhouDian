@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import com.yiwo.fuzhoudian.R;
 import com.yiwo.fuzhoudian.base.BaseFragment;
+import com.yiwo.fuzhoudian.pages.ShopHomeActivity;
+import com.yiwo.fuzhoudian.utils.StatusBarUtils;
 
 
 public class MineFragment extends BaseFragment {

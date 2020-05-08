@@ -1,9 +1,15 @@
 package com.yiwo.fuzhoudian;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -17,6 +23,8 @@ import com.yiwo.fuzhoudian.fragments.HomeFragment;
 import com.yiwo.fuzhoudian.fragments.MessageFragment;
 import com.yiwo.fuzhoudian.fragments.MineFragment;
 import com.yiwo.fuzhoudian.fragments.OrderFragment;
+import com.yiwo.fuzhoudian.pages.creatyouji.CreateYouJiActivity;
+import com.yiwo.fuzhoudian.utils.StatusBarUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,12 +80,18 @@ public class MainActivity extends BaseActivity {
     MessageFragment messageFragment;
     MineFragment mineFragment;
     OrderFragment orderFragment;
-
+    String[] permissions = new String[]{android.Manifest.permission.CALL_PHONE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.RECORD_AUDIO
+            , Manifest.permission.CAMERA};
+    List<String> mPermissionList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        getPermissions();
+        StatusBarUtils.setStatusBarTransparent(this);
         initFragment();
     }
 
@@ -175,6 +189,7 @@ public class MainActivity extends BaseActivity {
     }
     @OnClick({R.id.ll_btn_1, R.id.ll_btn_2, R.id.ll_btn_3, R.id.ll_btn_4, R.id.ll_btn_5})
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
             default:
                 break;
@@ -185,7 +200,8 @@ public class MainActivity extends BaseActivity {
                 switchFragment(1);
                 break;
             case R.id.ll_btn_3:
-                switchFragment(0);
+                intent.setClass(MainActivity.this, CreateYouJiActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_btn_4:
                 switchFragment(2);
@@ -193,6 +209,38 @@ public class MainActivity extends BaseActivity {
             case R.id.ll_btn_5:
                 switchFragment(3);
                 break;
+        }
+    }
+    public void getPermissions() {
+        /**
+         * 判断哪些权限未授予
+         */
+        mPermissionList.clear();
+        for (int i = 0; i < permissions.length; i++) {
+            if (ContextCompat.checkSelfPermission(this, permissions[i]) != PackageManager.PERMISSION_GRANTED) {
+                mPermissionList.add(permissions[i]);
+            }
+        }
+        /**
+         * 判断是否为空
+         */
+        if (mPermissionList.isEmpty()) {//未授予的权限为空，表示都授予了
+//            init();
+        } else {//请求权限方法
+            String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
+            ActivityCompat.requestPermissions(this, permissions, 1);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                if (fragment != null) {
+                    fragment.onRequestPermissionsResult(requestCode,permissions,grantResults);
+                }
+            }
         }
     }
 }
