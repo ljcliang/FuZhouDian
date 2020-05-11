@@ -15,6 +15,7 @@ import com.yiwo.fuzhoudian.adapter.FragmentViewpagerAdapter;
 import com.yiwo.fuzhoudian.base.BaseActivity;
 import com.yiwo.fuzhoudian.fragments.createyouji.CreateYouJiChoosePicsFragment;
 import com.yiwo.fuzhoudian.utils.StatusBarUtils;
+import com.yiwo.fuzhoudian.wangyiyunshipin.TakeVideoFragment_new;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -76,7 +77,7 @@ public class CreateYouJiActivity extends BaseActivity {
         if (!onlyShowAddVideo){
             fragmentList.add(new CreateYouJiChoosePicsFragment());
         }
-//        fragmentList.add(new TakeVideoFragment_new());
+        fragmentList.add(new TakeVideoFragment_new());
 //        fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
         mViewPagerFragmentAdapter = new FragmentViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
@@ -105,7 +106,7 @@ public class CreateYouJiActivity extends BaseActivity {
         if (!onlyShowAddVideo){
             mTitleDataList.add("相册");
         }
-//        mTitleDataList.add("视频");
+        mTitleDataList.add("视频");
 //        mTitleDataList.add("拍照");
 
         CommonNavigator commonNavigator = new CommonNavigator(this);

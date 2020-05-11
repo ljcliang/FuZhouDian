@@ -46,11 +46,11 @@ public class CustomRoundAngleImageView extends AppCompatImageView {
         }
         // 读取配置
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.Round_Image_View);
-        radius = array.getDimensionPixelOffset(R.styleable.Round_Image_View_radius, defaultRadius);
-        leftTopRadius = array.getDimensionPixelOffset(R.styleable.Round_Image_View_left_top_radius, defaultRadius);
-        rightTopRadius = array.getDimensionPixelOffset(R.styleable.Round_Image_View_right_top_radius, defaultRadius);
-        rightBottomRadius = array.getDimensionPixelOffset(R.styleable.Round_Image_View_right_bottom_radius, defaultRadius);
-        leftBottomRadius = array.getDimensionPixelOffset(R.styleable.Round_Image_View_left_bottom_radius, defaultRadius);
+        radius = array.getDimensionPixelOffset(R.styleable.Round_Image_View_radius_m, defaultRadius);
+        leftTopRadius = array.getDimensionPixelOffset(R.styleable.Round_Image_View_left_top_radius_m, defaultRadius);
+        rightTopRadius = array.getDimensionPixelOffset(R.styleable.Round_Image_View_right_top_radius_m, defaultRadius);
+        rightBottomRadius = array.getDimensionPixelOffset(R.styleable.Round_Image_View_right_bottom_radius_m, defaultRadius);
+        leftBottomRadius = array.getDimensionPixelOffset(R.styleable.Round_Image_View_left_bottom_radius_m, defaultRadius);
 
 //        LogUtils.e("radius --> " + radius);
 

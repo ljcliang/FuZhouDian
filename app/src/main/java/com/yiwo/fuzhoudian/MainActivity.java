@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -23,7 +24,9 @@ import com.yiwo.fuzhoudian.fragments.HomeFragment;
 import com.yiwo.fuzhoudian.fragments.MessageFragment;
 import com.yiwo.fuzhoudian.fragments.MineFragment;
 import com.yiwo.fuzhoudian.fragments.OrderFragment;
+import com.yiwo.fuzhoudian.pages.LoginActivity;
 import com.yiwo.fuzhoudian.pages.creatyouji.CreateYouJiActivity;
+import com.yiwo.fuzhoudian.sp.SpImp;
 import com.yiwo.fuzhoudian.utils.StatusBarUtils;
 
 import java.util.ArrayList;
@@ -84,6 +87,8 @@ public class MainActivity extends BaseActivity {
             android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.RECORD_AUDIO
             , Manifest.permission.CAMERA};
     List<String> mPermissionList = new ArrayList<>();
+    private SpImp spImp;
+    private String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +97,8 @@ public class MainActivity extends BaseActivity {
 
         getPermissions();
         StatusBarUtils.setStatusBarTransparent(this);
+        spImp = new SpImp(this);
+        uid = spImp.getUID();
         initFragment();
     }
 
@@ -204,7 +211,12 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.ll_btn_4:
-                switchFragment(2);
+                if (!TextUtils.isEmpty(spImp.getUID()) && !spImp.getUID().equals("0")) {
+                    switchFragment(2);
+                } else {
+                    intent.setClass(this, LoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.ll_btn_5:
                 switchFragment(3);

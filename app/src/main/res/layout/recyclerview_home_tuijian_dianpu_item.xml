@@ -14,8 +14,8 @@
     <com.yiwo.fuzhoudian.widget.CustomRoundAngleImageView
         android:id="@+id/iv_big"
         android:src="@mipmap/zanwutupian"
-        test:left_top_radius="5dp"
-        test:right_top_radius="5dp"
+        test:left_top_radius_m="5dp"
+        test:right_top_radius_m="5dp"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="240dp" />

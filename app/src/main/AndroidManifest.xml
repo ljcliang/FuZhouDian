@@ -10,16 +10,75 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<!--        —————————————————————网易云视频——————————————————————— -->
+        <activity
+            android:name=".wangyiyunshipin.ShortVideoEditActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged" />
+        <activity
+            android:name=".wangyiyunshipin.VideoImportActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|stateUnchanged" />
+        <activity
+            android:name=".wangyiyunshipin.VideoPlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" /> <!-- 用于HMS SDK引导升级HMS APK，提供给系统安装器读取升级文件 -->
+        <activity android:name=".wangyiyunshipin.VideoUpLoadListActivity" />
+<!--    ___________________________________________________________________________________________________-->
         <activity android:name=".pages.ShopHomeActivity"></activity>
         <activity android:name=".pages.creatyouji.CreateYouJiActivity"></activity>
+        <activity android:name=".pages.creatyouji.CreateYouJiAddInfoActivity"></activity>
+        <activity
+            android:name="com.donkingliang.imageselector.ImageSelectorActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.donkingliang.imageselector.PreviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.donkingliang.imageselector.ClipImageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity android:name=".pages.UserAgreementActivity" />
+        <activity
+            android:name=".pages.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pages.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pages.ForgetPwActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="designwidth"
+            android:value="750" />
+        <meta-data
+            android:name="designdpi"
+            android:value="320" /> <!-- 位置 -->
+        <meta-data
+            android:name="fontsize"
+            android:value="1.0" />
+        <meta-data
+            android:name="unit"
+            android:value="px" />
+<!--        网易-->
+        <meta-data
+            android:name="com.netease.nim.appKey"
+            android:value="dc4285450493b9851169ad13a64b4cd8" />
     </application>
     <permission
         android:name="com.yiwo.fuzhoudian.permission.RECEIVE_MSG"
@@ -69,11 +128,11 @@
     <!-- 允许挂载和反挂载文件系统 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 允许程序使用PowerManager WakeLocks以防止处理器休眠或者屏幕锁屏 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- 声明程序使用camera和自动对焦功能 -->
-    <uses-permission android:name="com.yiwo.friendscometogether.permission.RECEIVE_MSG" />
+    <uses-permission android:name="com.yiwo.fuzhoudian.permission.RECEIVE_MSG" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.GET_TASKS" /> <!-- 声明程序使用OpenGL ES 2.0 -->
-    <uses-permission android:name="com.yiwo.friendscometogether.permission.PROCESS_PUSH_MSG" />
-    <uses-permission android:name="com.yiwo.friendscometogether.permission.MIPUSH_RECEIVE" />
+    <uses-permission android:name="com.yiwo.fuzhoudian.permission.PROCESS_PUSH_MSG" />
+    <uses-permission android:name="com.yiwo.fuzhoudian.permission.MIPUSH_RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />

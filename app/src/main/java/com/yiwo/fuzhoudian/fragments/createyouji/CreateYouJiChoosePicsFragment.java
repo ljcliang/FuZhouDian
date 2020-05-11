@@ -30,6 +30,8 @@ import com.yiwo.fuzhoudian.base.BaseFragment;
 import com.yiwo.fuzhoudian.create_friendremember.PicBean;
 import com.yiwo.fuzhoudian.create_friendremember.PicMuluModel;
 import com.yiwo.fuzhoudian.create_friendremember.PicsMuLuAdapter;
+import com.yiwo.fuzhoudian.pages.creatyouji.CreateYouJiActivity;
+import com.yiwo.fuzhoudian.pages.creatyouji.CreateYouJiAddInfoActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -104,29 +106,16 @@ public class CreateYouJiChoosePicsFragment extends BaseFragment {
                 String new_path = "/storage/emulated/0/Pictures/"+"瞳伴diyi友记_"+ System.currentTimeMillis() + ".jpg";
 //                BitmapUtils.saveBitmap(mMCropImageView.convertToBitmap(),new_path);
                 for (Map.Entry<Integer, String> entry : map_choose_postion.entrySet()) {
-//                    Log.d("ddaad",";;Key:"+entry.getKey()+"//Value:"+entry.getValue());
-//                    if (isFirst&&map_choose_postion.size()>0){
-//
-////                        String new_path = "/storage/emulated/0/Pictures/tongban_"+entry.getValue().substring(entry.getValue().lastIndexOf("/")+1);
-//                        String new_path = "/storage/emulated/0/Pictures/"+"瞳伴友记_"+System.currentTimeMillis() + ".jpg";
-//                        BitmapUtils.saveBitmap(BitmapUtils.getFixedBitmap(context,entry.getValue(),false),new_path);
-////                        BitmapUtils.saveBitmap(mMCropImageView.getBitmap(mMCropImageView.getWidth(),mMCropImageView.getHeight()),new_path);
-//                        BitmapUtils.saveBitmap(BitmapUtils.getFixedBitmap(context,entry.getValue(),false),new_path);
-//                        list.add(new_path);
-//                        isFirst = false;
-//                        Log.d("ddaad",";;Key:"+entry.getKey()+"//Value:"+entry.getValue()+"//new_path"+new_path+ isFirst);
-//                        continue;
-//                    }
                     list.add(entry.getValue());
                 }
                 if (list.size()<1){
                     toToast(context,"请选择图片");
                     break;
                 }
-//                Intent intent = new Intent();
-//                intent.putStringArrayListExtra("paths",list);
-//                intent.setClass(context, CreateFriendRememberActivity1.class);
-//                context.startActivity(intent);
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra("paths",list);
+                intent.setClass(context, CreateYouJiAddInfoActivity.class);
+                context.startActivity(intent);
                 getActivity().finish();
                 break;
             case R.id.rl_back_text:

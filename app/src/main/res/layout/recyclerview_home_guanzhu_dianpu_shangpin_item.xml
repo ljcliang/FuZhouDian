@@ -8,7 +8,7 @@
     android:layout_height="wrap_content">
     <com.yiwo.fuzhoudian.widget.CustomRoundAngleImageView
         android:id="@+id/iv"
-        test:radius="15dp"
+        test:radius_m="15dp"
         android:src="@mipmap/zanwutupian"
         android:scaleType="centerCrop"
         android:layout_marginTop="10dp"

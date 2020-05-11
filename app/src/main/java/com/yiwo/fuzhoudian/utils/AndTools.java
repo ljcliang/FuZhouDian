@@ -58,7 +58,10 @@ public class AndTools {
             ;
         }
     }
-
+    public static String getDeviceId(Activity context) {
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getDeviceId();
+    }
     public static int getVerCode(Context context) {
         int verCode = -1;
         try {
