@@ -50,6 +50,40 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <!--顶部bar样式PX
+    <RelativeLayout-->
+    <style name="rl_top_bar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">88px</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+    <!--返回图片样式PX-->
+    <style name="iv_return">
+        <item name="android:layout_width">30px</item>
+        <item name="android:layout_height">30px</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:src">@mipmap/back_ffffff</item>
+        <item name="android:layout_marginLeft">25px</item>
+        <item name="android:layout_marginRight">25px</item>
+    </style>
+    <!--返回RelativeLayout样式PX-->
+    <style name="rl_return">
+        <item name="android:layout_width">100px</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <!--顶部标题样式PX-->
+    <style name="tv_top_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">32px</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
     <style name="popwindow_anim_top_in_out">
         <item name="android:windowEnterAnimation">@anim/pophiden_anim_top_in</item>
         <item name="android:windowExitAnimation">@anim/pophiden_anim_top_out</item>

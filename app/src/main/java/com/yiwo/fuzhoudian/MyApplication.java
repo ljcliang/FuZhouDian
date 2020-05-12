@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,7 +39,7 @@ public class MyApplication extends Application {
     public static TimeCount timecount;
     // 修改密码获取验证码倒计时
     public static FTPTimeCount ftptimecount;
-
+    public static String genPath;
     private List<Activity> mList = new LinkedList<Activity>();
     private static MyApplication instance;
     private SpImp spImp;
@@ -46,6 +47,11 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ScreenAdapterTools.init(this);
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {//SD卡已挂载
+            genPath = getExternalCacheDir().getAbsolutePath().toString() + "/";
+        } else {
+            genPath = getCacheDir().getAbsolutePath() + "/";
+        }
         MultiDex.install(this);
         DemoCache.setContext(this);
         spImp = new SpImp(this);

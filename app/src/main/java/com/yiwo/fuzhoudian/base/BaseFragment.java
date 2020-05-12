@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
+import com.yiwo.fuzhoudian.utils.StringUtils;
+
 
 public class BaseFragment extends Fragment {
 
@@ -21,5 +23,10 @@ public class BaseFragment extends Fragment {
         normalDialog.setNegativeButton("取消", listener1);
         // 显示
         normalDialog.show();
+    }
+    public String getToken(String url){
+        String token = StringUtils.stringToMD5(url);
+        String tokens = StringUtils.stringToMD5(token);
+        return tokens;
     }
 }

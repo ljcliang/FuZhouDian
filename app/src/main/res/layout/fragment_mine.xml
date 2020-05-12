@@ -100,6 +100,7 @@
                     android:layout_width="340dp"
                     android:layout_height="88dp">
                     <RelativeLayout
+                        android:id="@+id/rl_xiaoxi"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -125,6 +126,7 @@
                             android:layout_height="wrap_content"/>
                     </RelativeLayout>
                     <RelativeLayout
+                        android:id="@+id/rl_dongtai"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -150,6 +152,7 @@
                             android:layout_height="wrap_content"/>
                     </RelativeLayout>
                     <RelativeLayout
+                        android:id="@+id/rl_shangpin"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -167,7 +170,7 @@
                             android:layout_below="@+id/tv_num3"
                             android:layout_marginTop="7dp"
                             android:layout_centerHorizontal="true"
-                            android:text="商店"
+                            android:text="商品"
                             android:lines="1"
                             android:textSize="13sp"
                             android:textColor="@color/color_101010"
@@ -175,6 +178,7 @@
                             android:layout_height="wrap_content"/>
                     </RelativeLayout>
                     <RelativeLayout
+                        android:id="@+id/rl_guanzhu"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -216,18 +220,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
+                    android:id="@+id/ll_daichuli"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@mipmap/mine_daichuli"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="30dp"
                         android:layout_height="30dp"/>
                     <TextView
-                        android:text="待支付"
+                        android:text="待处理"
                         android:layout_gravity="center_horizontal"
                         android:textSize="13sp"
                         android:textColor="@color/color_101010"
@@ -235,18 +240,19 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/ll_yichuli"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@mipmap/mine_yichuli"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="30dp"
                         android:layout_height="30dp"/>
                     <TextView
-                        android:text="待送货"
+                        android:text="已处理"
                         android:layout_gravity="center_horizontal"
                         android:textSize="13sp"
                         android:textColor="@color/color_101010"
@@ -254,18 +260,19 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/ll_yiwancheng"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@mipmap/mine_yiwancheng"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="30dp"
                         android:layout_height="30dp"/>
                     <TextView
-                        android:text="已送货"
+                        android:text="已完成"
                         android:layout_gravity="center_horizontal"
                         android:textSize="13sp"
                         android:textColor="@color/color_101010"
@@ -273,12 +280,13 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/ll_tuikuan"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@mipmap/mine_tuikuan"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="30dp"
@@ -304,6 +312,7 @@
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
+                    android:id="@+id/rl_bottom_1"
                     android:background="@drawable/selector_fragment_my_bg"
                     android:layout_width="match_parent"
                     android:layout_height="38dp">
@@ -312,7 +321,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
                         android:id="@+id/iv1"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@mipmap/mine_1xiangce"
                         android:layout_width="25dp"
                         android:layout_height="25dp" />
 
@@ -336,6 +345,7 @@
 
                 </RelativeLayout>
                 <RelativeLayout
+                    android:id="@+id/rl_bottom_2"
                     android:background="@drawable/selector_fragment_my_bg"
                     android:layout_width="match_parent"
                     android:layout_height="38dp">
@@ -344,7 +354,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
                         android:id="@+id/iv2"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@mipmap/mine_1shipin"
                         android:layout_width="25dp"
                         android:layout_height="25dp" />
 
@@ -352,7 +362,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="12dp"
                         android:layout_toRightOf="@+id/iv2"
-                        android:text="我的相册"
+                        android:text="我的视频"
                         android:textColor="@color/color_101010"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
@@ -368,6 +378,7 @@
 
                 </RelativeLayout>
                 <RelativeLayout
+                    android:id="@+id/rl_bottom_3"
                     android:background="@drawable/selector_fragment_my_bg"
                     android:layout_width="match_parent"
                     android:layout_height="38dp">
@@ -376,7 +387,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
                         android:id="@+id/iv3"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@mipmap/mine_1tongxunlu"
                         android:layout_width="25dp"
                         android:layout_height="25dp" />
 
@@ -384,7 +395,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="12dp"
                         android:layout_toRightOf="@+id/iv3"
-                        android:text="我的相册"
+                        android:text="通讯录"
                         android:textColor="@color/color_101010"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
@@ -400,6 +411,7 @@
 
                 </RelativeLayout>
                 <RelativeLayout
+                    android:id="@+id/rl_bottom_4"
                     android:background="@drawable/selector_fragment_my_bg"
                     android:layout_width="match_parent"
                     android:layout_height="38dp">
@@ -408,7 +420,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
                         android:id="@+id/iv4"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@mipmap/mine_1pinglun"
                         android:layout_width="25dp"
                         android:layout_height="25dp" />
 
@@ -416,7 +428,139 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="12dp"
                         android:layout_toRightOf="@+id/iv4"
-                        android:text="我的相册"
+                        android:text="我的评论"
+                        android:textColor="@color/color_101010"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_marginRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/right"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_bottom_5"
+                    android:background="@drawable/selector_fragment_my_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp">
+
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:id="@+id/iv5"
+                        android:src="@mipmap/mine_1liulanlishi"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp" />
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@+id/iv5"
+                        android:text="浏览历史"
+                        android:textColor="@color/color_101010"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_marginRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/right"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_bottom_6"
+                    android:background="@drawable/selector_fragment_my_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp">
+
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:id="@+id/iv6"
+                        android:src="@mipmap/mine_1chuanshuliebiao"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp" />
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@+id/iv6"
+                        android:text="上传列表"
+                        android:textColor="@color/color_101010"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_marginRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/right"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_bottom_7"
+                    android:background="@drawable/selector_fragment_my_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp">
+
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:id="@+id/iv7"
+                        android:src="@mipmap/mine_1shezhi"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp" />
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@+id/iv7"
+                        android:text="设置"
+                        android:textColor="@color/color_101010"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_marginRight="13dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/right"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_bottom_8"
+                    android:background="@drawable/selector_fragment_my_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp">
+
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:id="@+id/iv8"
+                        android:src="@mipmap/mine_1peisong"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp" />
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@+id/iv8"
+                        android:text="配送设置"
                         android:textColor="@color/color_101010"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"

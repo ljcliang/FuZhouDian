@@ -42,8 +42,17 @@
             android:name="com.donkingliang.imageselector.ClipImageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
+        <service android:name=".services.UpdateService" />
+        <activity android:name=".pages.SetActivity" />
+        <activity android:name=".pages.FeedbackActivity" />
+        <activity android:name=".pages.MyPicturesActivity" />
+        <activity android:name=".imagepreview.ImagePreviewActivity" />
         <activity android:name=".pages.UserAgreementActivity" />
+        <activity android:name=".pages.MyVideosActivity" />
+        <activity android:name=".pages.BlackUserActivity" />
+        <activity android:name=".pages.FindFriendByTelActivity" />
+        <activity android:name=".pages.MyContactActivity" />
+        <activity android:name=".pages.MyCommentActivity" />
         <activity
             android:name=".pages.LoginActivity"
             android:screenOrientation="portrait" />

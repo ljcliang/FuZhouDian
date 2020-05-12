@@ -28,6 +28,8 @@ import com.yiwo.fuzhoudian.pages.LoginActivity;
 import com.yiwo.fuzhoudian.pages.creatyouji.CreateYouJiActivity;
 import com.yiwo.fuzhoudian.sp.SpImp;
 import com.yiwo.fuzhoudian.utils.StatusBarUtils;
+import com.yiwo.fuzhoudian.wangyiyunshipin.upload.constant.UploadType;
+import com.yiwo.fuzhoudian.wangyiyunshipin.upload.controller.UploadController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +101,7 @@ public class MainActivity extends BaseActivity {
         StatusBarUtils.setStatusBarTransparent(this);
         spImp = new SpImp(this);
         uid = spImp.getUID();
+        initUpLoadController();
         initFragment();
     }
 
@@ -188,6 +191,12 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UploadController.getInstance().suspend();
+    }
+
     public ImageView getCartImageView() {
         return ivBottom3;
     }
@@ -242,6 +251,11 @@ public class MainActivity extends BaseActivity {
             String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
             ActivityCompat.requestPermissions(this, permissions, 1);
         }
+    }
+    private void initUpLoadController() {
+        UploadController.getInstance().init(MainActivity.this);
+        UploadController.getInstance().loadVideoDataFromLocal(UploadType.SHORT_VIDEO);
+//        UploadController.getInstance().attachUi(VideoUpLoadListActivity.this);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

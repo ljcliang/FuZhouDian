@@ -17,6 +17,7 @@
     <color name="color_f0f0f0">#f0f0f0</color>
     <color name="color_f3f3f3">#f3f3f3</color>
     <color name="color_d84c37">#d84c37</color>
+    <color name="color_000000000">#00000000</color>
 <!--    ———————————————————————————————————————— -->
     <color name="mix_audio_bg">#80000000</color>
     <color name="color_upload_normal">#999999</color>
