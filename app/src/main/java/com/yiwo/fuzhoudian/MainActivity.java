@@ -24,6 +24,8 @@ import com.yiwo.fuzhoudian.fragments.HomeFragment;
 import com.yiwo.fuzhoudian.fragments.MessageFragment;
 import com.yiwo.fuzhoudian.fragments.MineFragment;
 import com.yiwo.fuzhoudian.fragments.OrderFragment;
+import com.yiwo.fuzhoudian.fragments.webfragment.HomeDianPuGuanLiFragment;
+import com.yiwo.fuzhoudian.network.NetConfig;
 import com.yiwo.fuzhoudian.pages.LoginActivity;
 import com.yiwo.fuzhoudian.pages.creatyouji.CreateYouJiActivity;
 import com.yiwo.fuzhoudian.sp.SpImp;
@@ -81,7 +83,8 @@ public class MainActivity extends BaseActivity {
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-    HomeFragment homeFragment;
+//    HomeFragment homeFragment;
+    HomeDianPuGuanLiFragment homeFragment;
     MessageFragment messageFragment;
     MineFragment mineFragment;
     OrderFragment orderFragment;
@@ -106,7 +109,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initFragment() {
-        homeFragment = new HomeFragment();
+//        homeFragment = new HomeFragment();
+        homeFragment =  HomeDianPuGuanLiFragment.newInstance(NetConfig.BaseUrl+"action/ac_goods/myGoods?uid=4");
         orderFragment = new OrderFragment();
         messageFragment = new MessageFragment();
         mineFragment = new MineFragment();

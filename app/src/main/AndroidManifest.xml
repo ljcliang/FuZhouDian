@@ -53,6 +53,15 @@
         <activity android:name=".pages.FindFriendByTelActivity" />
         <activity android:name=".pages.MyContactActivity" />
         <activity android:name=".pages.MyCommentActivity" />
+        <activity android:name=".pages.MyInformationActivity" />
+        <activity android:name=".pages.RealNameActivity" />
+        <activity android:name=".pages.FaBu_XiuGaiShangPinActivity" />
+        <activity android:name=".pages.ShangPinServiceEditActivity" />
+        <activity android:name=".pages.webpages.DuiZhangShangPuWebActivity" />
+        <activity android:name=".pages.MessageActivity" />
+        <activity android:name=".pages.ZAndScActivity" />
+        <activity android:name=".pages.MessageViewActivity" />
+        <activity android:name=".pages.MessageFriendsActivity" />
         <activity
             android:name=".pages.LoginActivity"
             android:screenOrientation="portrait" />
