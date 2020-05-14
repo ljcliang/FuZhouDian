@@ -281,18 +281,18 @@
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="38dp">
-        <TextView
-            android:id="@+id/btn_jixuchaungzuo"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:textColor="@color/color_white_ffffff"
-            android:text="保存继续"
-            android:layout_marginRight="1dp"
-            android:background="@drawable/bg_4e94a0_20dp_left"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+<!--        <TextView-->
+<!--            android:id="@+id/btn_jixuchaungzuo"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="14sp"-->
+<!--            android:gravity="center"-->
+<!--            android:textColor="@color/color_white_ffffff"-->
+<!--            android:text="保存继续"-->
+<!--            android:layout_marginRight="1dp"-->
+<!--            android:background="@drawable/bg_4e94a0_20dp_left"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"/>-->
         <TextView
             android:id="@+id/btn_lijifabu"
             android:textStyle="bold"
@@ -301,7 +301,7 @@
             android:textColor="@color/color_white_ffffff"
             android:text="立即发布"
             android:layout_marginLeft="1dp"
-            android:background="@drawable/bg_4e94a0_20dp_right"
+            android:background="@drawable/bg_4e94a0_15dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

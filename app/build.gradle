@@ -58,8 +58,13 @@ dependencies {
     implementation files('libs/vcloudUpload.jar')
     implementation files('libs/Livestreaming_v2.1.0.jar')
     implementation files('libs/Transcode-2.5.5.jar')
+    implementation files('libs/MiPush_SDK_Client_3_6_12.jar')
+
+    // 小米、华为、魅族、fcm 推送
+    implementation 'com.netease.nimlib:push:5.5.0'
     implementation 'com.github.Jay-Goo:RangeSeekBar:v1.0.7'
     implementation 'com.android.support:multidex:1.0.3'
+//    implementation 'com.huawei.android.hms:push:2.6.3.302'
     //okhttp + 拦截器
     api 'com.squareup.okhttp3:okhttp:3.4.1'
     api 'com.github.bumptech.glide:okhttp3-integration:4.3.1'

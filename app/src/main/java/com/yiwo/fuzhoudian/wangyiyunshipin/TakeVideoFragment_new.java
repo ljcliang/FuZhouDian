@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
@@ -38,6 +37,7 @@ import com.netease.nim.uikit.support.permission.annotation.OnMPermissionNeverAsk
 import com.netease.vcloud.video.effect.VideoEffect;
 import com.netease.vcloud.video.render.NeteaseView;
 import com.yiwo.fuzhoudian.R;
+import com.yiwo.fuzhoudian.pages.AddVideoTitleActivity;
 import com.yiwo.fuzhoudian.wangyiyunshipin.shortvideo.MediaCaptureController;
 import com.yiwo.fuzhoudian.wangyiyunshipin.shortvideo.model.MediaCaptureOptions;
 import com.yiwo.fuzhoudian.wangyiyunshipin.shortvideo.model.ResolutionType;
@@ -181,7 +181,7 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
                 // 视频编辑完成
                 VideoItem videoItem = (VideoItem)  data.getSerializableExtra(EXTRA_VIDEO_ITEM);
                 if (videoItem != null) {
-//                    AddVideoTitleActivity.startUpLoadVideoActivity(getContext(), (VideoItem) data.getSerializableExtra(EXTRA_VIDEO_ITEM),videoPathList.get(0));
+                    AddVideoTitleActivity.startUpLoadVideoActivity(getContext(), (VideoItem) data.getSerializableExtra(EXTRA_VIDEO_ITEM),videoPathList.get(0));
                 }
                 getActivity().finish();
             } else {

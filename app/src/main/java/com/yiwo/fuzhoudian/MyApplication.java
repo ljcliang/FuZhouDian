@@ -57,9 +57,9 @@ public class MyApplication extends Application {
         spImp = new SpImp(this);
         //        // 此处 certificate 请传入为开发者配置好的小米证书名称
         MixPushConfig xm_config = new MixPushConfig();
-        xm_config.xmAppId = "2882303761517874789";
-        xm_config.xmAppKey = "5911787488789";
-        xm_config.xmCertificateName = "tongbanxiaomizhengshu";
+        xm_config.xmAppId = "2882303761518398929";
+        xm_config.xmAppKey = "5781839872929";
+        xm_config.xmCertificateName = "fzdxiaomizhengshu";
 
         xm_config.hwCertificateName = "tongbanhuaweizhengshu";
         // 4.6.0 开始，第三方推送配置入口改为 SDKOption#mixPushConfig，旧版配置方式依旧支持

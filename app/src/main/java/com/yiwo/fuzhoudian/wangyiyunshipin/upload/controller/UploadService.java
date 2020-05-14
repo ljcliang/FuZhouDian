@@ -13,6 +13,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -20,7 +21,10 @@ import com.netease.cloud.nos.android.core.CallRet;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.vcloudnosupload.UploadBuilder;
 import com.netease.vcloudnosupload.VcloudUpload;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yiwo.fuzhoudian.R;
+import com.yiwo.fuzhoudian.network.NetConfig;
 import com.yiwo.fuzhoudian.pages.creatyouji.CreateYouJiActivity;
 import com.yiwo.fuzhoudian.sp.SpImp;
 import com.yiwo.fuzhoudian.utils.StringUtils;
@@ -414,50 +418,50 @@ public class UploadService extends Service {
             public void run() {
                 if (videoItem.getType() == UploadType.SHORT_VIDEO) {
                     Log.d("asdasdsd11","vid::"+videoItem.getVid()+"");
-//                    ViseHttp.POST(NetConfig.videoInfoUpload)
-//                            .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.videoInfoUpload))
-//                            .addParam("vname",videoItem.getVideoFaBuName())
-//                            .addParam("vid",videoItem.getVid()+"")
-//                            .addParam("uid",spImp.getUID())
-//                            .addParam("address",videoItem.getVideoAddress())
-//                            .request(new ACallback<String>() {
-//                                @Override
-//                                public void onSuccess(String data) {
-//                                    Log.d("asdasdsd11",data);
-//                                    JSONObject jsonObject = JSONObject.parseObject(data);
-//                                    int resCode = jsonObject.getIntValue("code");
-//                                    if(resCode == 200) {
-//                                        Toast.makeText(UploadService.this,"发布成功", Toast.LENGTH_SHORT).show();
-//                                        AddVideoResponseEntity entity = new AddVideoResponseEntity();
-//                                        JSONObject videoInfoJson = jsonObject.getJSONObject("obj").getJSONObject("ret");
-//                                        VideoInfoEntity videoInfoEntity = new VideoInfoEntity();
-//                                        videoInfoEntity.setCreateTime(videoInfoJson.getLongValue("createTime"));
-//                                        videoInfoEntity.setOrigUrl(videoInfoJson.getString("origUrl"));
-//                                        videoInfoEntity.setSnapshotUrl(videoInfoJson.getString("snapshotUrl"));
-//                                        Log.d("asdasdsd ;code == 200","//00//  "+"\n"+data+"\n"+videoInfoEntity.getSnapshotUrl()+"//////"+videoInfoJson.getString("snapshotUrl"));
-//                                        videoInfoEntity.setUpdateTime(videoInfoJson.getLongValue("updateTime"));
-//                                        videoInfoEntity.setVid(videoInfoJson.getLongValue("vid"));
-//                                        videoInfoEntity.setTypeName(videoInfoJson.getString("typeName"));
-//                                        videoInfoEntity.setVideoName(videoInfoJson.getString("videoName"));
-//                                        videoInfoEntity.setDuration(videoInfoJson.getLong("duration"));
-//                                        videoInfoEntity.setInitialSize(videoInfoJson.getLong("initialSize"));
-//                                        entity.setVideoInfoEntity(videoInfoEntity);
-//
-//                                        UploadDbHelper.removeItemFromDb(videoItem);
-//                                        UploadTotalDataAccessor.getInstance().getWaitAddToServerItems().remove(videoItem);
-//                                        UploadTotalDataAccessor.getInstance().uploadSuccess(videoItem);
-//
-//                                        controller.onAddVideoResult(200, videoItem.getId(), entity);
-//                                    }else {
-//                                        Toast.makeText(UploadService.this,"发布失败", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onFail(int errCode, String errMsg) {
-//
-//                                }
-//                            });
+                    ViseHttp.POST(NetConfig.videoInfoUpload)
+                            .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.videoInfoUpload))
+                            .addParam("vname",videoItem.getVideoFaBuName())
+                            .addParam("vid",videoItem.getVid()+"")
+                            .addParam("uid",spImp.getUID())
+                            .addParam("address",videoItem.getVideoAddress())
+                            .request(new ACallback<String>() {
+                                @Override
+                                public void onSuccess(String data) {
+                                    Log.d("asdasdsd11",data);
+                                    JSONObject jsonObject = JSONObject.parseObject(data);
+                                    int resCode = jsonObject.getIntValue("code");
+                                    if(resCode == 200) {
+                                        Toast.makeText(UploadService.this,"发布成功", Toast.LENGTH_SHORT).show();
+                                        AddVideoResponseEntity entity = new AddVideoResponseEntity();
+                                        JSONObject videoInfoJson = jsonObject.getJSONObject("obj").getJSONObject("ret");
+                                        VideoInfoEntity videoInfoEntity = new VideoInfoEntity();
+                                        videoInfoEntity.setCreateTime(videoInfoJson.getLongValue("createTime"));
+                                        videoInfoEntity.setOrigUrl(videoInfoJson.getString("origUrl"));
+                                        videoInfoEntity.setSnapshotUrl(videoInfoJson.getString("snapshotUrl"));
+                                        Log.d("asdasdsd ;code == 200","//00//  "+"\n"+data+"\n"+videoInfoEntity.getSnapshotUrl()+"//////"+videoInfoJson.getString("snapshotUrl"));
+                                        videoInfoEntity.setUpdateTime(videoInfoJson.getLongValue("updateTime"));
+                                        videoInfoEntity.setVid(videoInfoJson.getLongValue("vid"));
+                                        videoInfoEntity.setTypeName(videoInfoJson.getString("typeName"));
+                                        videoInfoEntity.setVideoName(videoInfoJson.getString("videoName"));
+                                        videoInfoEntity.setDuration(videoInfoJson.getLong("duration"));
+                                        videoInfoEntity.setInitialSize(videoInfoJson.getLong("initialSize"));
+                                        entity.setVideoInfoEntity(videoInfoEntity);
+
+                                        UploadDbHelper.removeItemFromDb(videoItem);
+                                        UploadTotalDataAccessor.getInstance().getWaitAddToServerItems().remove(videoItem);
+                                        UploadTotalDataAccessor.getInstance().uploadSuccess(videoItem);
+
+                                        controller.onAddVideoResult(200, videoItem.getId(), entity);
+                                    }else {
+                                        Toast.makeText(UploadService.this,"发布失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFail(int errCode, String errMsg) {
+
+                                }
+                            });
                 } else {
                     DemoServerHttpClient.getInstance().addVideo(videoItem.getVid(), videoItem.getDisplayName(), 0, new DemoServerHttpClient.DemoServerHttpCallback<AddVideoResponseEntity>() {
                         @Override

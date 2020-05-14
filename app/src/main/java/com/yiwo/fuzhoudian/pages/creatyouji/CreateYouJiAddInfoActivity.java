@@ -25,24 +25,49 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.donkingliang.imageselector.utils.ImageSelector;
+import com.google.gson.Gson;
 import com.jph.takephoto.app.TakePhotoActivity;
 import com.jph.takephoto.model.TResult;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.fuzhoudian.R;
 import com.yiwo.fuzhoudian.adapter.LabelChooseOneAdapter;
 import com.yiwo.fuzhoudian.adapter.NewCreateFriendRemberIntercalationAdapter;
 import com.yiwo.fuzhoudian.custom.MyAlertDialog;
+import com.yiwo.fuzhoudian.custom.WeiboDialogUtils;
+import com.yiwo.fuzhoudian.model.CityModel;
 import com.yiwo.fuzhoudian.model.NewUserIntercalationPicModel;
 import com.yiwo.fuzhoudian.model.UserLabelModel;
+import com.yiwo.fuzhoudian.network.ActivityConfig;
+import com.yiwo.fuzhoudian.network.NetConfig;
+import com.yiwo.fuzhoudian.pages.CityActivity;
 import com.yiwo.fuzhoudian.sp.SpImp;
+import com.yiwo.fuzhoudian.utils.StringUtils;
+import com.yiwo.fuzhoudian.utils.TokenUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 public class CreateYouJiAddInfoActivity extends TakePhotoActivity {
 
@@ -209,31 +234,31 @@ public class CreateYouJiAddInfoActivity extends TakePhotoActivity {
 
         uid = spImp.getUID();
 
-//        ViseHttp.POST(NetConfig.userLabel)
-//                .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userLabel))
-//                .addParam("type", "1")
-//                .request(new ACallback<String>() {
-//                    @Override
-//                    public void onSuccess(String data) {
-//                        try {
-//                            Log.e("222", data);
-//                            JSONObject jsonObject = new JSONObject(data);
-//                            if (jsonObject.getInt("code") == 200) {
-//                                Gson gson = new Gson();
-//                                UserLabelModel userLabelModel = gson.fromJson(data, UserLabelModel.class);
-//                                labelList = new ArrayList<>();
-//                                labelList.addAll(userLabelModel.getObj());
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFail(int errCode, String errMsg) {
-//
-//                    }
-//                });
+        ViseHttp.POST(NetConfig.userLabel)
+                .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userLabel))
+                .addParam("type", "1")
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            Log.e("222", data);
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200) {
+                                Gson gson = new Gson();
+                                UserLabelModel userLabelModel = gson.fromJson(data, UserLabelModel.class);
+                                labelList = new ArrayList<>();
+                                labelList.addAll(userLabelModel.getObj());
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
         etTitle.addTextChangedListener(textTitleWatcher);
     }
 
@@ -268,8 +293,7 @@ public class CreateYouJiAddInfoActivity extends TakePhotoActivity {
     @OnClick({R.id.activity_create_friend_remember_rl_back, R.id.activity_create_friend_remember_rl_edit_title,  R.id.activity_create_friend_remember_rl_activity_city,
              R.id.activity_create_friend_remember_rl_complete,
             R.id.activity_create_friend_remember_rl_label,
-            R.id.activity_create_friend_remember_rl_active_title,R.id.rl_choose_address,
-            R.id.btn_jixuchaungzuo,R.id.btn_lijifabu})
+            R.id.activity_create_friend_remember_rl_active_title,R.id.rl_choose_address,R.id.btn_lijifabu})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_create_friend_remember_rl_back:
@@ -278,12 +302,12 @@ public class CreateYouJiAddInfoActivity extends TakePhotoActivity {
             case R.id.activity_create_friend_remember_rl_edit_title:
                 break;
             case R.id.rl_choose_address:
-//                Intent it = new Intent(CreateYouJiAddInfoActivity.this, CityActivity.class);
-//                it.putExtra(ActivityConfig.ACTIVITY, "createYouJi");
-//                startActivityForResult(it, REQUEST_CODE_GET_CITY);
+                Intent it = new Intent(CreateYouJiAddInfoActivity.this, CityActivity.class);
+                it.putExtra(ActivityConfig.ACTIVITY, "createYouJi");
+                startActivityForResult(it, REQUEST_CODE_GET_CITY);
                 break;
             case R.id.activity_create_friend_remember_rl_complete:
-//                next_tocaogao();
+                next_tocaogao();
                 break;
             case R.id.activity_create_friend_remember_rl_label:
                 if (labelList.size()==0){
@@ -297,11 +321,8 @@ public class CreateYouJiAddInfoActivity extends TakePhotoActivity {
 //                    Intent it_suoshu = new Intent(CreateYouJiAddInfoActivity.this, SuoShuHuoDongActivity.class);
 //                    startActivityForResult(it_suoshu, REQUEST_CODE_SUO_SHU_HUO_DONG);
                 break;
-            case R.id.btn_jixuchaungzuo:
-//                next();
-                break;
             case R.id.btn_lijifabu:
-//                fabu();
+                fabu();
                 break;
         }
     }
@@ -411,16 +432,16 @@ public class CreateYouJiAddInfoActivity extends TakePhotoActivity {
             }
             adapter.notifyDataSetChanged();
         }
-//        if (requestCode == REQUEST_CODE_GET_CITY && data != null && resultCode == 1) {//选择城市
-//            CityModel model = (CityModel) data.getSerializableExtra(ActivityConfig.CITY);
-//            tvCity.setText(model.getName());
-//        } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 2) {//重置
-//            tvCity.setText("");
-//            tvCity.setHint("请选择或输入活动地点");
-//        } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 3) {//国际城市
-//            String city = data.getStringExtra("city");
-//            tvCity.setText(city);
-//        }
+        if (requestCode == REQUEST_CODE_GET_CITY && data != null && resultCode == 1) {//选择城市
+            CityModel model = (CityModel) data.getSerializableExtra(ActivityConfig.CITY);
+            tvCity.setText(model.getName());
+        } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 2) {//重置
+            tvCity.setText("");
+            tvCity.setHint("请选择或输入活动地点");
+        } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 3) {//国际城市
+            String city = data.getStringExtra("city");
+            tvCity.setText(city);
+        }
         if (requestCode == REQUEST_CODE_SUO_SHU_HUO_DONG && resultCode == 1){
 //            GetFriendActiveListModel.ObjBean bean = (GetFriendActiveListModel.ObjBean) data.getSerializableExtra("suoshuhuodong");
 //            yourChoiceActiveName = bean.getPftitle();
@@ -456,469 +477,296 @@ public class CreateYouJiAddInfoActivity extends TakePhotoActivity {
     }
 
 
-//    private void fabu() {
-//        if(TextUtils.isEmpty(etTitle.getText().toString())){
-//            Toast.makeText(CreateYouJiAddInfoActivity.this, "请填写标题", Toast.LENGTH_SHORT).show();
-//            return;
-//        }else if (TextUtils.isEmpty(tvLabel.getText().toString())){
-//            Toast.makeText(CreateYouJiAddInfoActivity.this, "请选择标签", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        //20190225 限制友记上传图片数量 1
-//        else if(mList.size()<1){
-//            Toast.makeText(CreateYouJiAddInfoActivity.this, "请至少上传1张照片", Toast.LENGTH_SHORT).show();
-//            return;
-//        }else if (TextUtils.isEmpty(tvCity.getText().toString())){
-//            Toast.makeText(CreateYouJiAddInfoActivity.this, "请填写地点", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        else {
-//            //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
+    private void fabu() {
+        if(TextUtils.isEmpty(etTitle.getText().toString())){
+            Toast.makeText(CreateYouJiAddInfoActivity.this, "请填写标题", Toast.LENGTH_SHORT).show();
+            return;
+        }else if (TextUtils.isEmpty(tvLabel.getText().toString())){
+            Toast.makeText(CreateYouJiAddInfoActivity.this, "请选择标签", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //20190225 限制友记上传图片数量 1
+        else if(mList.size()<1){
+            Toast.makeText(CreateYouJiAddInfoActivity.this, "请至少上传1张照片", Toast.LENGTH_SHORT).show();
+            return;
+        }else if (TextUtils.isEmpty(tvCity.getText().toString())){
+            Toast.makeText(CreateYouJiAddInfoActivity.this, "请填写地点", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else {
+            //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
 //            if (!tvTimeStart.getText().toString().equals("")&&!tvTimeEnd.getText().toString().equals("")){
 //                if (StringUtils.getTimeCompareSize(tvTimeStart.getText().toString(),tvTimeEnd.getText().toString())==1){
 //                    Toast.makeText(CreateYouJiAddInfoActivity.this, "活动开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
 //                    return;
 //                }
 //            }
-//        }
-//        dialog = WeiboDialogUtils.createLoadingDialog(CreateYouJiAddInfoActivity.this, "请等待...");
-//        spImp.setLastCreateYouJiLabelText(tvLabel.getText().toString());
-//        spImp.setLastCreateYouJiLabelId(yourChoiceId);
-//        spImp.setLastCreateYouJiAddress(tvCity.getText().toString());
-//        Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
-//            @Override
-//            public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
-//                final Map<String, File> map = new LinkedHashMap<>();
-//                final List<String> list = new ArrayList<>();
-//                for (int i = 0; i < mList.size(); i++) {
-//                    if (mList.get(i).getFirstPic()){
-//                        list.add(0,mList.get(i).getPic());
-//                    }else {
-//                        list.add(mList.get(i).getPic());
-//                    }
-//                }
-//                Luban.with(CreateYouJiAddInfoActivity.this)
-//                        .load(list)
-//                        .ignoreBy(100)
-//                        .filter(new CompressionPredicate() {
-//                            @Override
-//                            public boolean apply(String path) {
-//                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-//                            }
-//                        })
-//                        .setCompressListener(new OnCompressListener() {
-//                            @Override
-//                            public void onStart() {
-//                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
-//                            }
-//
-//                            @Override
-//                            public void onSuccess(File file) {
-//                                // TODO 压缩成功后调用，返回压缩后的图片文件
-//                                files.add(file);
-//                                Log.e("222", list.size() + "..." + files.size());
-//                                if (files.size() == list.size()) {
-//                                    for (int i = 0; i < files.size(); i++) {
-//                                        map.put("fmpic[" + i + "]", files.get(i));
-//                                    }
-//                                    Log.e("222", map.size() + "");
-//                                    e.onNext(map);
-//                                }
-////                                files.clear();
-//                            }
-//
-//                            @Override
-//                            public void onError(Throwable e) {
-//                                // TODO 当压缩过程出现问题时调用
-//                            }
-//                        }).launch();
-//
-//            }
-//        });
-//        Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(Map<String, File> value) {
-//                ViseHttp.UPLOAD(NetConfig.userRelease)
-//                        .addHeader("Content-Type","multipart/form-data")
-//                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
-//                        .addParam("fmtitle", etTitle.getText().toString())
+        }
+        dialog = WeiboDialogUtils.createLoadingDialog(CreateYouJiAddInfoActivity.this, "请等待...");
+        spImp.setLastCreateYouJiLabelText(tvLabel.getText().toString());
+        spImp.setLastCreateYouJiLabelId(yourChoiceId);
+        spImp.setLastCreateYouJiAddress(tvCity.getText().toString());
+        Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
+            @Override
+            public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
+                final Map<String, File> map = new LinkedHashMap<>();
+                final List<String> list = new ArrayList<>();
+                for (int i = 0; i < mList.size(); i++) {
+                    if (mList.get(i).getFirstPic()){
+                        list.add(0,mList.get(i).getPic());
+                    }else {
+                        list.add(mList.get(i).getPic());
+                    }
+                }
+                Luban.with(CreateYouJiAddInfoActivity.this)
+                        .load(list)
+                        .ignoreBy(100)
+                        .filter(new CompressionPredicate() {
+                            @Override
+                            public boolean apply(String path) {
+                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                            }
+                        })
+                        .setCompressListener(new OnCompressListener() {
+                            @Override
+                            public void onStart() {
+                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                            }
+
+                            @Override
+                            public void onSuccess(File file) {
+                                // TODO 压缩成功后调用，返回压缩后的图片文件
+                                files.add(file);
+                                Log.e("222", list.size() + "..." + files.size());
+                                if (files.size() == list.size()) {
+                                    for (int i = 0; i < files.size(); i++) {
+                                        map.put("fmpic[" + i + "]", files.get(i));
+                                    }
+                                    Log.e("222", map.size() + "");
+                                    e.onNext(map);
+                                }
+//                                files.clear();
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                // TODO 当压缩过程出现问题时调用
+                            }
+                        }).launch();
+
+            }
+        });
+        Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Map<String, File> value) {
+                ViseHttp.UPLOAD(NetConfig.userRelease)
+                        .addHeader("Content-Type","multipart/form-data")
+                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
+                        .addParam("fmtitle", etTitle.getText().toString())
 //                        .addParam("fmcontent", etContent.getText().toString())
-//                        .addParam("fmaddress", tvCity.getText().toString())
-//                        .addParam("uid", uid)
-//                        .addParam("fmlable", yourChoiceId)
+                        .addParam("fmaddress", tvCity.getText().toString())
+                        .addParam("uid", uid)
+                        .addParam("fmlable", yourChoiceId)
 //                        .addParam("fmgotime", tvTimeStart.getText().toString())
 //                        .addParam("fmendtime", tvTimeEnd.getText().toString())
 //                        .addParam("percapitacost", etPrice.getText().toString())
-//                        .addParam("activity_id", TextUtils.isEmpty(tvActiveTitle.getText().toString())?"0":yourChoiceActiveId)
+                        .addParam("activity_id", TextUtils.isEmpty(tvActiveTitle.getText().toString())?"0":yourChoiceActiveId)
 //                        .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
-//                        .addParam("accesspassword", password)
-//                        .addParam("type", "0")
-//                        .addFiles(value)
-//                        .request(new ACallback<String>() {
-//                            @Override
-//                            public void onSuccess(String data) {
-//                                Log.e("222", data);
-//                                try {
-//                                    JSONObject jsonObject = new JSONObject(data);
-//                                    if (jsonObject.getInt("code") == 200) {
-//                                        Toast.makeText(CreateYouJiAddInfoActivity.this, jsonObject.getString("message") + "", Toast.LENGTH_SHORT).show();
-//                                        WeiboDialogUtils.closeDialog(dialog);
-//                                        finish();
-//                                    }else {
-//                                        WeiboDialogUtils.closeDialog(dialog);
-//                                        Toast.makeText(CreateYouJiAddInfoActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                        .addParam("accesspassword", password)
+                        .addParam("type", "0")
+                        .addFiles(value)
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                Log.e("222", data);
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200) {
+                                        Toast.makeText(CreateYouJiAddInfoActivity.this, jsonObject.getString("message") + "", Toast.LENGTH_SHORT).show();
+                                        WeiboDialogUtils.closeDialog(dialog);
+                                        finish();
+                                    }else {
+                                        WeiboDialogUtils.closeDialog(dialog);
+                                        Toast.makeText(CreateYouJiAddInfoActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    WeiboDialogUtils.closeDialog(dialog);
+                                    Toast.makeText(CreateYouJiAddInfoActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+                                Log.e("222", errMsg);
+                                WeiboDialogUtils.closeDialog(dialog);
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                WeiboDialogUtils.closeDialog(dialog);
+            }
+
+            @Override
+            public void onComplete() {
+                WeiboDialogUtils.closeDialog(dialog);
+            }
+        };
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    private void next_tocaogao(){//仅保存至草稿
+        dialog = WeiboDialogUtils.createLoadingDialog(CreateYouJiAddInfoActivity.this, "请等待...");
+        Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
+            @Override
+            public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
+//                        File file = new File(images);
+//                        Luban.with(CreateFriendRememberActivity.this)
+//                                .load(images)
+//                                .ignoreBy(100)
+//                                .filter(new CompressionPredicate() {
+//                                    @Override
+//                                    public boolean apply(String path) {
+//                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
 //                                    }
-//                                } catch (JSONException e) {
-//                                    WeiboDialogUtils.closeDialog(dialog);
-//                                    Toast.makeText(CreateYouJiAddInfoActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onFail(int errCode, String errMsg) {
-//                                Log.e("222", errMsg);
-//                                WeiboDialogUtils.closeDialog(dialog);
-//                            }
-//                        });
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                WeiboDialogUtils.closeDialog(dialog);
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                WeiboDialogUtils.closeDialog(dialog);
-//            }
-//        };
-//        observable.subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(observer);
-//    }
-//
-//    private void next(){//保存草稿并跳转续写
-//        if(TextUtils.isEmpty(etTitle.getText().toString())){
-//            Toast.makeText(CreateYouJiAddInfoActivity.this, "请填写标题", Toast.LENGTH_SHORT).show();
-//            return;
-//        }else if (TextUtils.isEmpty(tvLabel.getText().toString())){
-//            Toast.makeText(CreateYouJiAddInfoActivity.this, "请选择标签", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        //20190225 限制友记上传图片数量 1
-//        else if(mList.size()<1){
-//            Toast.makeText(CreateYouJiAddInfoActivity.this, "请至少上传1张照片", Toast.LENGTH_SHORT).show();
-//            return;
-//        }else if (TextUtils.isEmpty(tvCity.getText().toString())){
-//            Toast.makeText(CreateYouJiAddInfoActivity.this, "请填写地点", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        else {
-//            //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
-//            if (!tvTimeStart.getText().toString().equals("")&&!tvTimeEnd.getText().toString().equals("")){
-//                if (StringUtils.getTimeCompareSize(tvTimeStart.getText().toString(),tvTimeEnd.getText().toString())==1){
-//                    Toast.makeText(CreateYouJiAddInfoActivity.this, "活动开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//            }
-//        }
-//        dialog = WeiboDialogUtils.createLoadingDialog(CreateYouJiAddInfoActivity.this, "请等待...");
-//        Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
-//            @Override
-//            public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
-////                        File file = new File(images);
-////                        Luban.with(CreateFriendRememberActivity.this)
-////                                .load(images)
-////                                .ignoreBy(100)
-////                                .filter(new CompressionPredicate() {
-////                                    @Override
-////                                    public boolean apply(String path) {
-////                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-////                                    }
-////                                })
-////                                .setCompressListener(new OnCompressListener() {
-////                                    @Override
-////                                    public void onStart() {
-////                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
-////                                    }
-////
-////                                    @Override
-////                                    public void onSuccess(File file) {
-////                                        // TODO 压缩成功后调用，返回压缩后的图片文件
-////                                        e.onNext(file);
-////                                    }
-////
-////                                    @Override
-////                                    public void onError(Throwable e) {
-////                                        // TODO 当压缩过程出现问题时调用
-////                                    }
-////                                }).launch();
-//
-//                final Map<String, File> map = new LinkedHashMap<>();
-//                final List<String> list = new ArrayList<>();
-//                for (int i = 0; i < mList.size(); i++) {
-//                    list.add(mList.get(i).getPic());
-//                }
-//                Luban.with(CreateYouJiAddInfoActivity.this)
-//                        .load(list)
-//                        .ignoreBy(100)
-//                        .filter(new CompressionPredicate() {
-//                            @Override
-//                            public boolean apply(String path) {
-//                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-//                            }
-//                        })
-//                        .setCompressListener(new OnCompressListener() {
-//                            @Override
-//                            public void onStart() {
-//                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
-//                            }
-//
-//                            @Override
-//                            public void onSuccess(File file) {
-//                                // TODO 压缩成功后调用，返回压缩后的图片文件
-//                                files.add(file);
-//                                Log.e("222", list.size() + "..." + files.size());
-//                                if (files.size() == list.size()) {
-//                                    for (int i = 0; i < files.size(); i++) {
-//                                        map.put("fmpic[" + i + "]", files.get(i));
+//                                })
+//                                .setCompressListener(new OnCompressListener() {
+//                                    @Override
+//                                    public void onStart() {
+//                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
 //                                    }
-//                                    Log.e("222", map.size() + "");
-//                                    e.onNext(map);
-//                                }
-////                                files.clear();
-//                            }
 //
-//                            @Override
-//                            public void onError(Throwable e) {
-//                                // TODO 当压缩过程出现问题时调用
-//                                WeiboDialogUtils.closeDialog(dialog);
-//                            }
-//                        }).launch();
+//                                    @Override
+//                                    public void onSuccess(File file) {
+//                                        // TODO 压缩成功后调用，返回压缩后的图片文件
+//                                        e.onNext(file);
+//                                    }
 //
-//            }
-//        });
-//        Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(Map<String, File> value) {
-//                ViseHttp.UPLOAD(NetConfig.userRelease)
-//                        .addHeader("Content-Type","multipart/form-data")
-//                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
-//                        .addParam("fmtitle", etTitle.getText().toString())
+//                                    @Override
+//                                    public void onError(Throwable e) {
+//                                        // TODO 当压缩过程出现问题时调用
+//                                    }
+//                                }).launch();
+
+                final Map<String, File> map = new LinkedHashMap<>();
+                final List<String> list = new ArrayList<>();
+                for (int i = 0; i < mList.size(); i++) {
+                    list.add(mList.get(i).getPic());
+                }
+                Luban.with(CreateYouJiAddInfoActivity.this)
+                        .load(list)
+                        .ignoreBy(100)
+                        .filter(new CompressionPredicate() {
+                            @Override
+                            public boolean apply(String path) {
+                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                            }
+                        })
+                        .setCompressListener(new OnCompressListener() {
+                            @Override
+                            public void onStart() {
+                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                            }
+
+                            @Override
+                            public void onSuccess(File file) {
+                                // TODO 压缩成功后调用，返回压缩后的图片文件
+                                files.add(file);
+                                Log.e("222", list.size() + "..." + files.size());
+                                if (files.size() == list.size()) {
+                                    for (int i = 0; i < files.size(); i++) {
+                                        map.put("fmpic[" + i + "]", files.get(i));
+                                    }
+                                    Log.e("222", map.size() + "");
+                                    e.onNext(map);
+                                }
+//                                files.clear();
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                // TODO 当压缩过程出现问题时调用
+                                WeiboDialogUtils.closeDialog(dialog);
+                            }
+                        }).launch();
+
+            }
+        });
+        Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Map<String, File> value) {
+                ViseHttp.UPLOAD(NetConfig.userRelease)
+                        .addHeader("Content-Type","multipart/form-data")
+                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
+                        .addParam("fmtitle", etTitle.getText().toString())
 //                        .addParam("fmcontent", etContent.getText().toString())
-//                        .addParam("fmaddress", tvCity.getText().toString())
-//                        .addParam("uid", uid)
-//                        .addParam("fmlable", yourChoiceId)
+                        .addParam("fmaddress", tvCity.getText().toString())
+                        .addParam("uid", uid)
+                        .addParam("fmlable", yourChoiceId)
 //                        .addParam("fmgotime", tvTimeStart.getText().toString())
 //                        .addParam("fmendtime", tvTimeEnd.getText().toString())
 //                        .addParam("percapitacost", etPrice.getText().toString())
-//                        .addParam("activity_id", TextUtils.isEmpty(tvActiveTitle.getText().toString())?"0":yourChoiceActiveId)
+                        .addParam("activity_id", TextUtils.isEmpty(tvActiveTitle.getText().toString())?"0":yourChoiceActiveId)
 //                        .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
-//                        .addParam("accesspassword", password)
-//                        .addParam("type", "1")
-//                        .addFiles(value)
-//                        .request(new ACallback<String>() {
-//                            @Override
-//                            public void onSuccess(String data) {
-//                                try {
-//                                    Log.e("222", data);
-//                                    JSONObject jsonObject = new JSONObject(data);
-//                                    if (jsonObject.getInt("code") == 200) {
-//                                        Gson gson = new Gson();
-//                                        UserReleaseModel userReleaseModel = gson.fromJson(data, UserReleaseModel.class);
-//                                        Intent intent = new Intent();
-//                                        intent.putExtra("id", userReleaseModel.getObj().getId()+"");
-//                                        intent.putExtra("type", "0");//传0为当前友记为未发布状态
-//                                        intent.setClass(CreateYouJiAddInfoActivity.this, CreateIntercalationActivity.class);
-//                                        WeiboDialogUtils.closeDialog(dialog);
-//                                        startActivity(intent);
-//                                        CreateYouJiAddInfoActivity.this.finish();
-//                                    }else {
-//                                        WeiboDialogUtils.closeDialog(dialog);
-//                                        Toast.makeText(CreateYouJiAddInfoActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-//                                    }
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                    WeiboDialogUtils.closeDialog(dialog);
-//                                    Toast.makeText(CreateYouJiAddInfoActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onFail(int errCode, String errMsg) {
-//                                WeiboDialogUtils.closeDialog(dialog);
-//                            }
-//                        });
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                WeiboDialogUtils.closeDialog(dialog);
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                WeiboDialogUtils.closeDialog(dialog);
-//            }
-//        };
-//        observable.subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(observer);
-//    }
-//    private void next_tocaogao(){//仅保存至草稿
-//        dialog = WeiboDialogUtils.createLoadingDialog(CreateYouJiAddInfoActivity.this, "请等待...");
-//        Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
-//            @Override
-//            public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
-////                        File file = new File(images);
-////                        Luban.with(CreateFriendRememberActivity.this)
-////                                .load(images)
-////                                .ignoreBy(100)
-////                                .filter(new CompressionPredicate() {
-////                                    @Override
-////                                    public boolean apply(String path) {
-////                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-////                                    }
-////                                })
-////                                .setCompressListener(new OnCompressListener() {
-////                                    @Override
-////                                    public void onStart() {
-////                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
-////                                    }
-////
-////                                    @Override
-////                                    public void onSuccess(File file) {
-////                                        // TODO 压缩成功后调用，返回压缩后的图片文件
-////                                        e.onNext(file);
-////                                    }
-////
-////                                    @Override
-////                                    public void onError(Throwable e) {
-////                                        // TODO 当压缩过程出现问题时调用
-////                                    }
-////                                }).launch();
-//
-//                final Map<String, File> map = new LinkedHashMap<>();
-//                final List<String> list = new ArrayList<>();
-//                for (int i = 0; i < mList.size(); i++) {
-//                    list.add(mList.get(i).getPic());
-//                }
-//                Luban.with(CreateYouJiAddInfoActivity.this)
-//                        .load(list)
-//                        .ignoreBy(100)
-//                        .filter(new CompressionPredicate() {
-//                            @Override
-//                            public boolean apply(String path) {
-//                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-//                            }
-//                        })
-//                        .setCompressListener(new OnCompressListener() {
-//                            @Override
-//                            public void onStart() {
-//                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
-//                            }
-//
-//                            @Override
-//                            public void onSuccess(File file) {
-//                                // TODO 压缩成功后调用，返回压缩后的图片文件
-//                                files.add(file);
-//                                Log.e("222", list.size() + "..." + files.size());
-//                                if (files.size() == list.size()) {
-//                                    for (int i = 0; i < files.size(); i++) {
-//                                        map.put("fmpic[" + i + "]", files.get(i));
-//                                    }
-//                                    Log.e("222", map.size() + "");
-//                                    e.onNext(map);
-//                                }
-////                                files.clear();
-//                            }
-//
-//                            @Override
-//                            public void onError(Throwable e) {
-//                                // TODO 当压缩过程出现问题时调用
-//                                WeiboDialogUtils.closeDialog(dialog);
-//                            }
-//                        }).launch();
-//
-//            }
-//        });
-//        Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(Map<String, File> value) {
-//                ViseHttp.UPLOAD(NetConfig.userRelease)
-//                        .addHeader("Content-Type","multipart/form-data")
-//                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
-//                        .addParam("fmtitle", etTitle.getText().toString())
-//                        .addParam("fmcontent", etContent.getText().toString())
-//                        .addParam("fmaddress", tvCity.getText().toString())
-//                        .addParam("uid", uid)
-//                        .addParam("fmlable", yourChoiceId)
-//                        .addParam("fmgotime", tvTimeStart.getText().toString())
-//                        .addParam("fmendtime", tvTimeEnd.getText().toString())
-//                        .addParam("percapitacost", etPrice.getText().toString())
-//                        .addParam("activity_id", TextUtils.isEmpty(tvActiveTitle.getText().toString())?"0":yourChoiceActiveId)
-//                        .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
-//                        .addParam("accesspassword", password)
-//                        .addParam("type", "1")
-//                        .addFiles(value)
-//                        .request(new ACallback<String>() {
-//                            @Override
-//                            public void onSuccess(String data) {
-//                                try {
-//                                    Log.e("222", data);
-//                                    JSONObject jsonObject = new JSONObject(data);
-//                                    if (jsonObject.getInt("code") == 200) {
-//                                        WeiboDialogUtils.closeDialog(dialog);
-//                                        CreateYouJiAddInfoActivity.this.finish();
-//                                        Toast.makeText(CreateYouJiAddInfoActivity.this,"已保存至草稿箱", Toast.LENGTH_SHORT).show();
-//                                    }else {
-//                                        WeiboDialogUtils.closeDialog(dialog);
-//                                        Toast.makeText(CreateYouJiAddInfoActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-//                                    }
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                    WeiboDialogUtils.closeDialog(dialog);
-//                                    Toast.makeText(CreateYouJiAddInfoActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onFail(int errCode, String errMsg) {
-//                                WeiboDialogUtils.closeDialog(dialog);
-//                            }
-//                        });
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                WeiboDialogUtils.closeDialog(dialog);
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                WeiboDialogUtils.closeDialog(dialog);
-//            }
-//        };
-//        observable.subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(observer);
-//    }
+                        .addParam("accesspassword", password)
+                        .addParam("type", "1")
+                        .addFiles(value)
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    Log.e("222", data);
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200) {
+                                        WeiboDialogUtils.closeDialog(dialog);
+                                        CreateYouJiAddInfoActivity.this.finish();
+                                        Toast.makeText(CreateYouJiAddInfoActivity.this,"已保存至草稿箱", Toast.LENGTH_SHORT).show();
+                                    }else {
+                                        WeiboDialogUtils.closeDialog(dialog);
+                                        Toast.makeText(CreateYouJiAddInfoActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    WeiboDialogUtils.closeDialog(dialog);
+                                    Toast.makeText(CreateYouJiAddInfoActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+                                WeiboDialogUtils.closeDialog(dialog);
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                WeiboDialogUtils.closeDialog(dialog);
+            }
+
+            @Override
+            public void onComplete() {
+                WeiboDialogUtils.closeDialog(dialog);
+            }
+        };
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub

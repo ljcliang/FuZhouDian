@@ -29,6 +29,7 @@ import com.netease.nim.uikit.common.util.sys.ScreenUtil;
 import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.netease.transcoding.TranscodingAPI;
 import com.yiwo.fuzhoudian.R;
+import com.yiwo.fuzhoudian.pages.AddVideoTitleActivity;
 import com.yiwo.fuzhoudian.utils.FileUtils;
 import com.yiwo.fuzhoudian.wangyiyunshipin.liveplayer.NEVideoView;
 import com.yiwo.fuzhoudian.wangyiyunshipin.liveplayer.VideoConstant;
@@ -435,7 +436,7 @@ public class VideoImportActivity extends BaseActivity implements ShortVideoGalle
                             File destFile = new File(appDir, fileName);
                             FileUtils.copy(new File(videoItem.getFilePath()), destFile);
                             videoItem.setFilePath(destFile.getPath());
-//                            UpLoadVideoActivity.startUpLoadVideoActivity(VideoImportActivity.this, videoItem,videoItem.getFilePath());
+                            AddVideoTitleActivity.startUpLoadVideoActivity(VideoImportActivity.this, videoItem,videoItem.getFilePath());
                             Intent intent = new Intent();
                             intent.putExtra(UPLOAD_EXTRA_FILTER_VIDEO,true);
                             setResult(Activity.RESULT_OK, intent);

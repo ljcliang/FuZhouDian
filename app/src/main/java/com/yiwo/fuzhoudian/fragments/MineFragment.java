@@ -22,6 +22,7 @@ import com.yiwo.fuzhoudian.R;
 import com.yiwo.fuzhoudian.base.BaseFragment;
 import com.yiwo.fuzhoudian.model.UserModel;
 import com.yiwo.fuzhoudian.network.NetConfig;
+import com.yiwo.fuzhoudian.pages.AllRememberActivity;
 import com.yiwo.fuzhoudian.pages.FaBu_XiuGaiShangPinActivity;
 import com.yiwo.fuzhoudian.pages.LoginActivity;
 import com.yiwo.fuzhoudian.pages.MessageActivity;
@@ -136,6 +137,13 @@ public class MineFragment extends BaseFragment {
                 }
                 break;
             case R.id.rl_dongtai:
+                if (!TextUtils.isEmpty(spImp.getUID()) && !spImp.getUID().equals("0")) {
+                    intent.setClass(getContext(), AllRememberActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.rl_shangpin:
                 intent.setClass(getContext(), FaBu_XiuGaiShangPinActivity.class);

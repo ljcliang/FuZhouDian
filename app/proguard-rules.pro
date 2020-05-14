@@ -21,3 +21,5 @@
 #-renamesourcefileattribute SourceFile
 -keep class com.netease.vcloud.** {*;}
 -keep class com.netease.transcoding.** {*;}
+-dontwarn com.xiaomi.push.**
+-keep class com.xiaomi.** {*;}

@@ -13,7 +13,7 @@ import java.io.File;
  */
 public class NougatUntil {
 
-    public static String providerName = "com.yiwo.friendscometogether.fileprovider";
+    public static String providerName = "com.yiwo.fuzhoudian.fileprovider";
 
 
     /**
