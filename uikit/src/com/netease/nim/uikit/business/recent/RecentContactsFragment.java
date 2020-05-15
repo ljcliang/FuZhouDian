@@ -308,6 +308,9 @@ public class RecentContactsFragment extends TFragment {
         alertDialog.addItem(title, new onSeparateItemClickListener() {
             @Override
             public void onClick() {
+
+
+
                 if (isTagSet(recent, RECENT_TAG_STICKY)) {
                     removeTag(recent, RECENT_TAG_STICKY);
                 } else {
@@ -349,6 +352,7 @@ public class RecentContactsFragment extends TFragment {
         tag = recent.getTag() | tag;
         recent.setTag(tag);
     }
+
 
     private void removeTag(RecentContact recent, long tag) {
         tag = recent.getTag() & ~tag;
