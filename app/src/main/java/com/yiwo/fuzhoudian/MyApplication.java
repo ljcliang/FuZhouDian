@@ -61,7 +61,7 @@ public class MyApplication extends Application {
         xm_config.xmAppKey = "5781839872929";
         xm_config.xmCertificateName = "fzdxiaomizhengshu";
 
-        xm_config.hwCertificateName = "tongbanhuaweizhengshu";
+        xm_config.hwCertificateName = "fzdhuaweizhengshu";
         // 4.6.0 开始，第三方推送配置入口改为 SDKOption#mixPushConfig，旧版配置方式依旧支持
         NIMClient.init(this, loginInfo(), options(xm_config));
         if (NIMUtil.isMainProcess(this)) {

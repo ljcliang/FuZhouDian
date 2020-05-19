@@ -113,7 +113,7 @@
             android:value="dc4285450493b9851169ad13a64b4cd8" />
         <meta-data
             android:name="com.huawei.hms.client.appid"
-            android:value="100438717" />
+            android:value="102231967" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -129,12 +129,6 @@
             android:authorities="com.yiwo.fuzhoudian.ipc.provider"
             android:exported="false"
             android:process=":core" />
-<!--        <provider-->
-<!--            android:name="com.huawei.hms.update.provider.UpdateProvider"-->
-<!--            android:authorities="com.yiwo.fuzhoudian.hms.update.provider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true" />-->
-
         <receiver
             android:name="com.netease.nimlib.service.NimReceiver"
             android:exported="false"
@@ -172,20 +166,27 @@
             </intent-filter>
         </receiver>
 <!--        _____________________________________________________________________________________-->
-
-
-        <!--        <receiver android:name=".broadcastreceiver.HWPushMessageReceiver">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="com.huawei.android.push.intent.REGISTRATION" />-->
-        <!--                <action android:name="com.huawei.android.push.intent.RECEIVE" />-->
-        <!--                <action android:name="com.huawei.android.push.intent.CLICK" />-->
-        <!--                <action android:name="com.huawei.intent.action.PUSH_STATE" />-->
-        <!--            </intent-filter>-->
-        <!--        </receiver>-->
-        <!-- &lt;!&ndash;Glide Glide能够识别我们自定义的MyGlideModule&ndash;&gt; -->
-        <!-- <meta-data -->
-        <!-- android:name="com.yiwo.friendscometogether.imagepreview.glideprogress.MyGlideModel" -->
-        <!-- android:value="GlideModule" /> -->
+<!--        ________________________华为开发集成，推送集成-->
+        <!--        <provider-->
+        <!--            android:name="com.huawei.hms.update.provider.UpdateProvider"-->
+        <!--            android:authorities="com.yiwo.fuzhoudian.hms.update.provider"-->
+        <!--            android:exported="false"-->
+        <!--            android:grantUriPermissions="true" />-->
+                <receiver android:name=".broadcastreceiver.HWPushMessageReceiver">
+                    <intent-filter>
+                        <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                        <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                        <action android:name="com.huawei.android.push.intent.CLICK" />
+                        <action android:name="com.huawei.intent.action.PUSH_STATE" />
+                    </intent-filter>
+                </receiver>
+        <service
+            android:name="com.netease.nimlib.mixpush.hw.HWPushService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <receiver android:name="com.netease.nimlib.mixpush.hw.HWPushReceiver">
             <intent-filter android:priority="0x7fffffff">
                 <action android:name="com.huawei.android.push.intent.REGISTRATION" />
@@ -198,13 +199,13 @@
                 android:name="CS_cloud_ablitity"
                 android:value="successRateAnalytics" />
         </receiver>
-<!--        <receiver android:name="com.huawei.hms.support.api.push.PushReceiver">-->
-<!--            <intent-filter>-->
+        <receiver android:name="com.huawei.hms.support.api.push.PushReceiver">
+            <intent-filter>
 
-<!--                &lt;!&ndash; 接收通道发来的通知栏消息，兼容老版本Push &ndash;&gt;-->
-<!--                <action android:name="com.huawei.intent.action.PUSH" />-->
-<!--            </intent-filter>-->
-<!--        </receiver> -->
+                <!-- 接收通道发来的通知栏消息，兼容老版本Push -->
+                <action android:name="com.huawei.intent.action.PUSH" />
+            </intent-filter>
+        </receiver>
         <!-- 网易云直播 -->
         <service android:name=".services.UpdateService" />
         <service android:name="com.amap.api.location.APSService" /> <!-- android:configChanges="orientation|keyboardHidden|screenSize" -->
@@ -243,7 +244,7 @@
 <!--        <service-->
 <!--            android:name="com.huawei.updatesdk.service.deamon.download.DownloadService"-->
 <!--            android:exported="false" />-->
-<!--        <service android:name=".wangyiyunshipin.upload.controller.UploadService" />-->
+        <service android:name=".wangyiyunshipin.upload.controller.UploadService" />
     </application>
     <permission
         android:name="com.yiwo.fuzhoudian.permission.RECEIVE_MSG"

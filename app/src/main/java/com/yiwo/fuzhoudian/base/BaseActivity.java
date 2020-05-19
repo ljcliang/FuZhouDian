@@ -14,6 +14,8 @@ import com.yiwo.fuzhoudian.utils.StringUtils;
 
 public class BaseActivity extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
