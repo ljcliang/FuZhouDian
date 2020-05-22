@@ -183,14 +183,14 @@
                 <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-<!--        <receiver android:name=".broadcastreceiver.HWPushMessageReceiver">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.huawei.android.push.intent.REGISTRATION" />-->
-<!--                <action android:name="com.huawei.android.push.intent.RECEIVE" />-->
-<!--                <action android:name="com.huawei.android.push.intent.CLICK" />-->
-<!--                <action android:name="com.huawei.intent.action.PUSH_STATE" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
+        <receiver android:name=".broadcastreceiver.HWPushMessageReceiver">
+            <intent-filter>
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <action android:name="com.huawei.android.push.intent.CLICK" />
+                <action android:name="com.huawei.intent.action.PUSH_STATE" />
+            </intent-filter>
+        </receiver>
 <!--        _____________________________________________________________________________________-->
 
 
