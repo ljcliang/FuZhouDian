@@ -94,8 +94,12 @@ dependencies {
     implementation 'com.github.Jay-Goo:RangeSeekBar:v1.0.7'
     implementation 'com.android.support:multidex:1.0.3'
 <<<<<<< HEAD
+<<<<<<< HEAD
     implementation 'com.huawei.agconnect:agconnect-core:1.0.0.300'
     implementation 'com.huawei.android.hms:push:2.6.3.301'
+=======
+//    implementation 'com.huawei.android.hms:push:2.6.3.301'
+>>>>>>> parent of b285cad... 1231
 =======
 //    implementation 'com.huawei.android.hms:push:2.6.3.301'
 >>>>>>> parent of b285cad... 1231

@@ -169,6 +169,7 @@
             </intent-filter>
         </receiver>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!-- -->
 <!--  华为开发集成，推送集成-->
 
@@ -193,6 +194,8 @@
             </intent-filter>
         </receiver>
 =======
+=======
+>>>>>>> parent of b285cad... 1231
 <!--        _____________________________________________________________________________________-->
 
 
@@ -208,6 +211,9 @@
         <!-- <meta-data -->
         <!-- android:name="com.yiwo.friendscometogether.imagepreview.glideprogress.MyGlideModel" -->
         <!-- android:value="GlideModule" /> -->
+<<<<<<< HEAD
+>>>>>>> parent of b285cad... 1231
+=======
 >>>>>>> parent of b285cad... 1231
         <receiver android:name="com.netease.nimlib.mixpush.hw.HWPushReceiver">
             <intent-filter android:priority="0x7fffffff">

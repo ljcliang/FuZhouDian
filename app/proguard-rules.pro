@@ -23,6 +23,7 @@
 -keep class com.netease.transcoding.** {*;}
 -dontwarn com.xiaomi.push.**
 -keep class com.xiaomi.** {*;}
+<<<<<<< HEAD
 -ignorewarnings
 -keepattributes *Annotation*
 -keepattributes Exceptions
@@ -32,3 +33,5 @@
 -keep class com.hianalytics.android.**{*;}
 -keep class com.huawei.updatesdk.**{*;}
 -keep class com.huawei.hms.**{*;}
+=======
+>>>>>>> parent of b285cad... 1231

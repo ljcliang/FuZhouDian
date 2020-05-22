@@ -6,6 +6,10 @@ buildscript {
         maven { url 'http://developer.huawei.com/repo/' }
         google()
         jcenter()
+<<<<<<< HEAD
+=======
+        
+>>>>>>> parent of b285cad... 1231
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.2'
@@ -21,10 +25,13 @@ allprojects {
         maven {
             url "https://jitpack.io"
         }
+<<<<<<< HEAD
         maven {url 'http://developer.huawei.com/repo/'}
         google()
         jcenter()
         mavenCentral()
+=======
+>>>>>>> parent of b285cad... 1231
     }
 }
 
