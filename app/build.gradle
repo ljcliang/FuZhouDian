@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.yiwo.fuzhoudian"
-        minSdkVersion 17
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -14,20 +14,6 @@ android {
         ndk {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
-        }
-        signingConfigs {
-            release {
-                storeFile file('D:/project/FuZhouDian/fzd_key.jks')
-                storePassword "123456"
-                keyAlias "key0"
-                keyPassword "123456"
-            }
-            debug {
-                keyAlias 'key0'
-                storeFile file('D:/project/FuZhouDian/fzd_key.jks')
-                keyPassword '123456'
-                storePassword '123456'
-            }
         }
     }
 
@@ -107,8 +93,12 @@ dependencies {
     implementation 'com.netease.nimlib:push:5.5.0'
     implementation 'com.github.Jay-Goo:RangeSeekBar:v1.0.7'
     implementation 'com.android.support:multidex:1.0.3'
+<<<<<<< HEAD
     implementation 'com.huawei.agconnect:agconnect-core:1.0.0.300'
     implementation 'com.huawei.android.hms:push:2.6.3.301'
+=======
+//    implementation 'com.huawei.android.hms:push:2.6.3.301'
+>>>>>>> parent of b285cad... 1231
     //okhttp + 拦截器
     api 'com.squareup.okhttp3:okhttp:3.4.1'
     api 'com.github.bumptech.glide:okhttp3-integration:4.3.1'
