@@ -23,6 +23,12 @@
 -keep class com.netease.transcoding.** {*;}
 -dontwarn com.xiaomi.push.**
 -keep class com.xiaomi.** {*;}
+-ignorewarnings
+-keepattributes *Annotation*
+-keepattributes Exceptions
+-keepattributes InnerClasses
+-keepattributes Signature
+-keepattributes SourceFile,LineNumberTable
 -keep class com.hianalytics.android.**{*;}
 -keep class com.huawei.updatesdk.**{*;}
 -keep class com.huawei.hms.**{*;}

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.huawei.agconnect'
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -31,6 +32,15 @@ android {
     }
 
     buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+////            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
+//        }
+//        debug {
+//            signingConfig signingConfigs.debug
+//        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -40,6 +50,25 @@ android {
     sourceSets {
         main { jniLibs.srcDirs = ['libs'] }
         main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] }
+    }
+    configurations.all {
+
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+
+            def requested = details.requested
+
+            if (requested.group == 'com.android.support') {
+
+                if (!requested.name.startsWith("multidex")) {
+
+                    details.useVersion '28.0.0' //这里改为你项目使用的版本即可
+
+                }
+
+            }
+
+        }
+
     }
 }
 
@@ -78,8 +107,8 @@ dependencies {
     implementation 'com.netease.nimlib:push:5.5.0'
     implementation 'com.github.Jay-Goo:RangeSeekBar:v1.0.7'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.huawei.android.hms:push:2.6.3.301'
     implementation 'com.huawei.agconnect:agconnect-core:1.0.0.300'
+    implementation 'com.huawei.android.hms:push:2.6.3.301'
     //okhttp + 拦截器
     api 'com.squareup.okhttp3:okhttp:3.4.1'
     api 'com.github.bumptech.glide:okhttp3-integration:4.3.1'
