@@ -168,8 +168,6 @@
                 <action android:name="com.xiaomi.mipush.ERROR" />
             </intent-filter>
         </receiver>
-<<<<<<< HEAD
-<<<<<<< HEAD
 <!-- -->
 <!--  华为开发集成，推送集成-->
 
@@ -185,17 +183,14 @@
                 <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <receiver android:name=".broadcastreceiver.HWPushMessageReceiver">
-            <intent-filter>
-                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
-                <action android:name="com.huawei.android.push.intent.RECEIVE" />
-                <action android:name="com.huawei.android.push.intent.CLICK" />
-                <action android:name="com.huawei.intent.action.PUSH_STATE" />
-            </intent-filter>
-        </receiver>
-=======
-=======
->>>>>>> parent of b285cad... 1231
+<!--        <receiver android:name=".broadcastreceiver.HWPushMessageReceiver">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.huawei.android.push.intent.REGISTRATION" />-->
+<!--                <action android:name="com.huawei.android.push.intent.RECEIVE" />-->
+<!--                <action android:name="com.huawei.android.push.intent.CLICK" />-->
+<!--                <action android:name="com.huawei.intent.action.PUSH_STATE" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
 <!--        _____________________________________________________________________________________-->
 
 
@@ -211,10 +206,6 @@
         <!-- <meta-data -->
         <!-- android:name="com.yiwo.friendscometogether.imagepreview.glideprogress.MyGlideModel" -->
         <!-- android:value="GlideModule" /> -->
-<<<<<<< HEAD
->>>>>>> parent of b285cad... 1231
-=======
->>>>>>> parent of b285cad... 1231
         <receiver android:name="com.netease.nimlib.mixpush.hw.HWPushReceiver">
             <intent-filter android:priority="0x7fffffff">
                 <action android:name="com.huawei.android.push.intent.REGISTRATION" />
